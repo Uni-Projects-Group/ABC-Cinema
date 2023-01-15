@@ -10,7 +10,7 @@ public class envBean implements java.io.Serializable {
     protected static final String password = env.get("DB_PWD");
     protected static final String url = env.get("DB_URL");
     protected static final String mail_user = env.get("MAIL_USER");
-    protected static final String mail_pwd = env.get("MAIL_PWD");
+    protected static final String mail_pwd = env.get("MAIL_PASS");
 
     public String getUrl() {
         return url;

@@ -17,7 +17,6 @@ import java.sql.ResultSet;
 
 @WebServlet("/login")
 public class login extends HttpServlet {
-    
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uemail = request.getParameter("email");

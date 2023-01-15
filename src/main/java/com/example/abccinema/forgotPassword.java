@@ -1,8 +1,8 @@
 package com.example.abccinema;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,24 +32,22 @@ public class forgotPassword extends HttpServlet {
             // Get the session object
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.socketFactory.port", "465");
-            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "465");
-            Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                private PasswordAuthentication passwordAuthentication() {
-                    return new PasswordAuthentication(envBean.mail_user, envBean.mail_pwd);
+            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.starttls.enable", "true");
+            Session session = Session.getDefaultInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("<email>", "<pwd>");
                 }
             });
 
             // compose message
             try {
                 MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(email));// change accordingly
+                message.setFrom(new InternetAddress(email));
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-                message.setSubject("Hello");
-                message.setText("your OTP is: " + otpvalue);
-                // send message
+                message.setSubject("ABC Cinema | Password Reset");
+                message.setText("Your OTP is: " + otpvalue);
                 Transport.send(message);
                 System.out.println("message sent successfully");
             } catch (MessagingException e) {

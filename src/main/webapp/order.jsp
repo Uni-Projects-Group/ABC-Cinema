@@ -76,7 +76,7 @@
             });
         },
         onCancel: function (data) {
-            console.log(data);
+            // console.log(data);
             // alert("Payment cancelled.")
         },
         onError: function (err) {

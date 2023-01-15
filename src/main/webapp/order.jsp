@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:if test="${sessionScope.userID == null && sessionScope.payable == null}">
+<c:if test="${sessionScope.userID == null || sessionScope.payable == null}">
     <c:redirect url="index.jsp"/>
 </c:if>
 <!DOCTYPE html>
@@ -60,7 +60,7 @@
             return actions.order.capture().then(function (details) {
                 // alert("Payment complete.")
                 // console.log(data.orderID);
-                fetch('/confirm', {
+                fetch('confirm', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',

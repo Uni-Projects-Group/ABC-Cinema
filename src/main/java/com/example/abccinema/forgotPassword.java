@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
 
-
 @WebServlet("/forgotPassword")
 public class forgotPassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +37,7 @@ public class forgotPassword extends HttpServlet {
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.port", "465");
             Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                protected PasswordAuthentication passwordAuthentication() {
+                private PasswordAuthentication passwordAuthentication() {
                     return new PasswordAuthentication(envBean.mail_user, envBean.mail_pwd);
                 }
             });

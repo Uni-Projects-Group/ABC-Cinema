@@ -18,7 +18,6 @@
 <input type="hidden" id="status" value="${requestScope.status}">
 
 <div class="main">
-
     <!-- Sing in  Form -->
     <section class="sign-in">
         <div class="container">
@@ -69,7 +68,6 @@
             </div>
         </div>
     </section>
-
 </div>
 
 <!-- JS -->

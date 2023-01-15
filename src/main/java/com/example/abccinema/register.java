@@ -58,7 +58,7 @@ public class register extends HttpServlet {
         try {
             Class.forName(envBean.driver);
             connection = DriverManager.getConnection(envBean.url, envBean.user, envBean.password);
-            PreparedStatement query = connection.prepareStatement("insert into user (uname,upwd,uemail,umobile) values (?,?,?,?)");
+            PreparedStatement query = connection.prepareStatement("insert into users (uname,upwd,uemail,umobile) values (?,?,?,?)");
             query.setString(1, uname);
             query.setString(2, upwd);
             query.setString(3, uemail);

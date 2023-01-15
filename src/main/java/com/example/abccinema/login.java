@@ -38,18 +38,18 @@ public class login extends HttpServlet {
         try {
             Class.forName(envBean.driver);
             Connection connection = DriverManager.getConnection(envBean.url, envBean.user, envBean.password);
-            PreparedStatement query = connection.prepareStatement("select * from user where uemail = ? and upwd = ?");
+            PreparedStatement query = connection.prepareStatement("select id,uname from users where uemail = ? and upwd = ?");
             query.setString(1, uemail);
             query.setString(2, upwd);
             ResultSet rs = query.executeQuery();
             if (rs.next()) {
                 session.setAttribute("userID", rs.getString("id"));
-                dispatcher = request.getRequestDispatcher("index.jsp");
+                response.sendRedirect("index.jsp");
             } else {
                 request.setAttribute("status", "failed");
                 dispatcher = request.getRequestDispatcher("login.jsp");
+                dispatcher.forward(request, response);
             }
-            dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

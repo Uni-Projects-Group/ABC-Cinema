@@ -15,8 +15,6 @@ import java.sql.PreparedStatement;
 
 @WebServlet("/newPassword")
 public class newPassword extends HttpServlet {
-    
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();

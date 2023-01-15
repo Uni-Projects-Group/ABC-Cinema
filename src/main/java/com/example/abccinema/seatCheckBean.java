@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class seatCheckBean extends envBean {
+public class seatCheckBean implements java.io.Serializable {
     // executes some database actions needed by the frontend
 
     private String reserved; // array of reserved seats

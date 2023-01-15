@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -17,6 +20,7 @@
             padding-top: 70px;
         }
     </style>
+    <title>ABC Cinema</title>
 </head>
 
 <body>
@@ -31,13 +35,9 @@
                             <i class="fa fa-lock fa-4x"></i>
                         </h3>
                         <h2 class="text-center">Enter OTP</h2>
-                        <%
-                            if (request.getAttribute("message") != null) {
-                                out.print("<p class='text-danger ml-1'>" + request.getAttribute("message") + "</p>");
-                            }
-
-                        %>
-
+                        <c:if test="${requestScope.message != null}">
+                            <p class='text-danger ml-1'>${requestScope.message}</p>
+                        </c:if>
                         <div class="panel-body">
 
                             <form id="register-form" action="otpValidate" role="form" autocomplete="off"
@@ -45,10 +45,11 @@
 
                                 <div class="form-group">
                                     <div class="input-group">
-											<span class="input-group-addon"><i
-                                                    class="glyphicon glyphicon-envelope color-blue"></i></span> <input
-                                            id="opt" name="otp" placeholder="Enter OTP"
-                                            class="form-control" type="text" required="required">
+											<span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-envelope color-blue"></i>
+                                            </span>
+                                        <input id="opt" name="otp" placeholder="Enter OTP"
+                                               class="form-control" type="text" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -57,10 +58,8 @@
                                            value="Reset Password" type="submit">
                                 </div>
 
-                                <input type="hidden" class="hide" name="token" id="token"
-                                       value="">
+                                <input type="hidden" class="hide" name="token" id="token" value="">
                             </form>
-
                         </div>
                     </div>
                 </div>

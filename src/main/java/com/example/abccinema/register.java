@@ -19,10 +19,10 @@ public class register extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uname = request.getParameter("name");
-        String uemail = request.getParameter("email");
-        String upwd = request.getParameter("pass");
-        String Reupwd = request.getParameter("re_pass");
-        String umobile = request.getParameter("contact");
+        String email = request.getParameter("email");
+        String password = request.getParameter("pass");
+        String rePass = request.getParameter("re_pass");
+        String contact = request.getParameter("contact");
         RequestDispatcher dispatcher = null;
         Connection connection = null;
 
@@ -31,38 +31,40 @@ public class register extends HttpServlet {
             dispatcher = request.getRequestDispatcher("register.jsp");
             dispatcher.forward(request, response);
         }
-        if (uemail == null || uemail.equals("")) {
+        if (email == null || email.equals("")) {
             request.setAttribute("status", "invalidEmail");
             dispatcher = request.getRequestDispatcher("register.jsp");
             dispatcher.forward(request, response);
         }
-        if (upwd == null || upwd.equals("")) {
+        if (password == null || password.equals("")) {
             request.setAttribute("status", "invalidPassword");
             dispatcher = request.getRequestDispatcher("register.jsp");
             dispatcher.forward(request, response);
-        } else if (!upwd.equals(Reupwd)) {
+        } else if (!password.equals(rePass)) {
             request.setAttribute("status", "invalidConfirmPassword");
             dispatcher = request.getRequestDispatcher("register.jsp");
             dispatcher.forward(request, response);
         }
-        if (umobile == null || umobile.equals("")) {
+        if (contact == null || contact.equals("")) {
             request.setAttribute("status", "invalidMobile");
             dispatcher = request.getRequestDispatcher("register.jsp");
             dispatcher.forward(request, response);
-        } else if (umobile.length() > 10) {
+        } else if (contact.length() > 10) {
             request.setAttribute("status", "invalidMobileLength");
             dispatcher = request.getRequestDispatcher("register.jsp");
             dispatcher.forward(request, response);
         }
 
         try {
+            String hash = utilBean.obtainHash(password);
+
             Class.forName(envBean.driver);
             connection = DriverManager.getConnection(envBean.url, envBean.user, envBean.password);
             PreparedStatement query = connection.prepareStatement("insert into users (uname,upwd,uemail,umobile) values (?,?,?,?)");
             query.setString(1, uname);
-            query.setString(2, upwd);
-            query.setString(3, uemail);
-            query.setString(4, umobile);
+            query.setString(2, hash);
+            query.setString(3, email);
+            query.setString(4, contact);
 
             int rowCount = query.executeUpdate();
             dispatcher = request.getRequestDispatcher("register.jsp");

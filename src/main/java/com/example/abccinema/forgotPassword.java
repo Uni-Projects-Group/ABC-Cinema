@@ -17,7 +17,6 @@ public class forgotPassword extends HttpServlet {
 
         String email = request.getParameter("email");
         HttpSession mySession = request.getSession();
-        utilBean utilBean = new utilBean();
         RequestDispatcher dispatcher = null;
 
         if (email != null || !email.equals("")) {

@@ -19,32 +19,40 @@ import java.sql.ResultSet;
 public class login extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uemail = request.getParameter("email");
-        String upwd = request.getParameter("password");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String redirect = request.getParameter("redirect");
         HttpSession session = request.getSession();
         RequestDispatcher dispatcher = null;
 
-        if (uemail == null || uemail.equals("")) {
+        if (email == null || email.equals("")) {
             request.setAttribute("status", "invalidEmail");
             dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }
-        if (upwd == null || upwd.equals("")) {
+        if (password == null || password.equals("")) {
             request.setAttribute("status", "invalidUpwd");
             dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }
 
         try {
+            String hash = utilBean.obtainHash(password);
+
             Class.forName(envBean.driver);
             Connection connection = DriverManager.getConnection(envBean.url, envBean.user, envBean.password);
             PreparedStatement query = connection.prepareStatement("select id,uname from users where uemail = ? and upwd = ?");
-            query.setString(1, uemail);
-            query.setString(2, upwd);
+            query.setString(1, email);
+            query.setString(2, hash);
             ResultSet rs = query.executeQuery();
             if (rs.next()) {
                 session.setAttribute("userID", rs.getString("id"));
-                response.sendRedirect("index.jsp");
+                if (redirect != null) {
+                    session.removeAttribute("redirectTo");
+                    response.sendRedirect(redirect);
+                } else {
+                    response.sendRedirect("index.jsp");
+                }
             } else {
                 request.setAttribute("status", "failed");
                 dispatcher = request.getRequestDispatcher("login.jsp");

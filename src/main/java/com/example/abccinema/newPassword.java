@@ -23,10 +23,12 @@ public class newPassword extends HttpServlet {
         RequestDispatcher dispatcher = null;
         if (newPassword != null && newPassword.equals(confPassword)) {
             try {
+                String hash = utilBean.obtainHash(newPassword);
+
                 Class.forName(envBean.driver);
                 Connection connection = DriverManager.getConnection(envBean.url, envBean.user, envBean.password);
-                PreparedStatement query = connection.prepareStatement("update users set upwd = ? where uemail = ? ");
-                query.setString(1, newPassword);
+                PreparedStatement query = connection.prepareStatement("update users set upwd = ? where uemail = ?");
+                query.setString(1, hash);
                 query.setString(2, (String) session.getAttribute("email"));
 
                 int rowCount = query.executeUpdate();

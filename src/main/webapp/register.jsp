@@ -80,22 +80,24 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css">
 <script type="text/javascript">
-    const status = document.getElementById("status").value;
-    if(status === "success"){
-        Swal.fire("Congrats","Account created succesfully","success");
-    } else if(status === "invalidName"){
-        Swal.fire("Congrats","Please Enter Name","error");
-    } else if(status === "invalidEmail"){
-        Swal.fire("Congrats","Please Enter Email","error");
-    } else if(status === "invalidUpwd"){
-        Swal.fire("Congrats","Please Enter Password","error");
-    } else if(status === "invalidConfirmPassword"){
-        Swal.fire("Congrats","Password dont match","error");
-    } else if(status === "invalidMobile"){
-        Swal.fire("Congrats","Please Enter Mobile","error");
-    } else if(status === "invalidMobileLength"){
-        Swal.fire("Congrats","Mobile number should be 10 digits","error");
-    }
+    window.addEventListener('DOMContentLoaded', event => {
+        const status = document.getElementById("status").value;
+        if(status === "success"){
+            Swal.fire("Congrats","Account created successfully. Please head to login page to continue.","success");
+        } else if(status === "invalidName"){
+            Swal.fire("Congrats","Please Enter Name","error");
+        } else if(status === "invalidEmail"){
+            Swal.fire("Congrats","Please Enter Email","error");
+        } else if(status === "invalidUpwd"){
+            Swal.fire("Congrats","Please Enter Password","error");
+        } else if(status === "invalidConfirmPassword"){
+            Swal.fire("Congrats","Password dont match","error");
+        } else if(status === "invalidMobile"){
+            Swal.fire("Congrats","Please Enter Mobile","error");
+        } else if(status === "invalidMobileLength"){
+            Swal.fire("Congrats","Mobile number should be 10 digits","error");
+        }
+    })
 </script>
 </body>
 </html>

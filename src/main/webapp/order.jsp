@@ -1,6 +1,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:if test="${sessionScope.userID == null || sessionScope.payable == null}">
+<c:if test="${sessionScope.userID == null}">
+    <c:set var="redirectTo" value="order.jsp" scope="session"/>
+    <c:redirect url="login.jsp"/>
+</c:if>
+<c:if test="${sessionScope.payable == null}">
     <c:redirect url="index.jsp"/>
 </c:if>
 <!DOCTYPE html>

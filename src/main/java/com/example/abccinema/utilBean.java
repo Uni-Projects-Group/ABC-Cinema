@@ -4,6 +4,10 @@ import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +17,7 @@ import java.util.Properties;
 
 public class utilBean {
 
-    private Session getSession() {
+    private static Session getSession() {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.auth", "true");
@@ -26,21 +30,33 @@ public class utilBean {
         });
     }
 
-    public void handleReset(String email, int otp) {
+    public static String obtainHash(String text) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(text.getBytes((StandardCharsets.UTF_8)));
+
+        BigInteger num = new BigInteger(1, hash);
+        StringBuilder hexStr = new StringBuilder(num.toString(16));
+        while (hexStr.length() < 32) {
+            hexStr.insert(0, '0');
+        }
+        return hexStr.toString();
+    }
+
+    public static void handleReset(String email, int otp) {
         try {
             Session session = getSession();
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(envBean.mail_user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
             message.setSubject("ABC Cinema | Password Reset");
-            message.setText(MessageFormat.format("Your OTP is: {0}", otp));
+            message.setText("Your OTP is: " + otp);
             Transport.send(message);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void handlePurchase(String userID, String movieID, String purchaseID, String seatsArr) {
+    public static void handlePurchase(String userID, String movieID, String purchaseID, String seatsArr) {
         ResultSet out;
         String email = null;
         String movie = null;
@@ -77,7 +93,7 @@ public class utilBean {
                     "Purchase ID: " + purchaseID + "\n" +
                     "Movie: " + movie + "\n" +
                     "Seats: " + seats + "\n" +
-                    "PLease show this to our staff to watch the show.";
+                    "Please show this to our staff to watch the show.";
             Session session = getSession();
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(envBean.mail_user));

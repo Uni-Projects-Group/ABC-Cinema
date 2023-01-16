@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 @WebServlet(urlPatterns = {"/booking", "/confirm"})
 public class booking extends HttpServlet {
-    utilBean util = new utilBean();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,10 +37,9 @@ public class booking extends HttpServlet {
             String movie = (String) session.getAttribute("movieID");
             String seats = (String) session.getAttribute("seats");
 
-            // replace this with paypal validation procedure
             if (orderID != null) {
+                utilBean.handlePurchase(user, movie, orderID, seats);
                 response.setStatus(200);
-                util.handlePurchase(user, movie, orderID, seats);
             } else {
                 response.setStatus(400);
             }

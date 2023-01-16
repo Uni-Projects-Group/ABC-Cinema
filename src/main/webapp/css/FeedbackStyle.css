@@ -1,0 +1,28 @@
+.FeedbackContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282A3A;
+    height: 500px;
+    width: 800px;
+    margin-top: 150px;
+    margin-left: 50px;
+}
+
+.displayFeedback{
+    margin-top: 100px;
+    margin-left: 50px;
+    border-radius: 20px;
+    align-items: center;
+    color: white;
+
+
+
+}
+.displayFeedback table{
+
+    padding:50px;
+    color: white;
+    border-spacing: 30px;
+
+}

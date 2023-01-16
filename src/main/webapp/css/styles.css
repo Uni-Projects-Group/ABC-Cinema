@@ -1,0 +1,70 @@
+.image {
+
+    height: 100%;
+    width: 100%;
+}
+
+
+.pic {
+
+    height: 40%;
+    width: 50%;
+}
+
+
+body {
+    background-color: #000045;
+    color: white;
+
+}
+
+nav {
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 1);
+    top: 0;
+}
+
+nav.scrolled {
+    background: rgba(17, 17, 17, 0.9);
+}
+
+nav ul {
+    float: right;
+    list-style: none;
+    padding: 25px;
+    margin: 0;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    font-size: 0.9em;
+    color: #fff;
+    text-decoration: none;
+    margin: 5px 0 0 20px;
+    display: block;
+}
+
+nav a:hover {
+
+    color: #C69749;
+}
+
+nav a:active {
+    color: #282A3A;
+    background-color: white;
+}
+
+
+.logo {
+    height: 100px;
+    float: left;
+
+}
+
+

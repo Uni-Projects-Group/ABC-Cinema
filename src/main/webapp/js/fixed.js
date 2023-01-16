@@ -18,4 +18,23 @@ window.addEventListener('DOMContentLoaded', event => {
     if (d > value) {
         document.getElementById("B1").setAttribute("disabled", "");
     }
+    
+    
+    
+    
+      
+    
+     
+      
+      
 });
+
+function disable(){
+    
+   
+    
+    
+    
+}
+
+

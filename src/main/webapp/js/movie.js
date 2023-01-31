@@ -1,27 +1,16 @@
-$(document).ready(function () {
-    // Handling the initial form
-    $("#continue").click(function () {
-        $("#seat-modal").show()
+const productContainers = [...document.querySelectorAll('.product-container')];
+const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
+const preBtn = [...document.querySelectorAll('.pre-btn')];
+
+productContainers.forEach((item, i) => {
+    let containerDimensions = item.getBoundingClientRect();
+    let containerWidth = containerDimensions.width;
+
+    nxtBtn[i].addEventListener('click', () => {
+        item.scrollLeft += containerWidth;
     })
 
-    // Modal close button
-    $("#close-modal").click(function () {
-        $("#seat-modal").hide()
-    })
-
-    $(":checkbox[name='seats']").on('change', function () {
-        const seatarr = []
-        const price = 4
-        $.each($(":checkbox[name='seats']"), function () {
-            if (this.checked) {
-                seatarr.push($(this).val())
-            }
-        })
-        console.log(seatarr)
-        $("#selected").text(seatarr.toString())
-
-        const total = price * seatarr.length
-        $("#total").text("$ " + total.toString())
-        $("#payable").val(total.toString())
+    preBtn[i].addEventListener('click', () => {
+        item.scrollLeft -= containerWidth;
     })
 })

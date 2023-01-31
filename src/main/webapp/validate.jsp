@@ -9,7 +9,7 @@
             rel="stylesheet" id="bootstrap-css">
     <script
             src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
 
     <link rel="stylesheet"

@@ -18,9 +18,9 @@
 </sql:query>
 <html>
 <head>
-    <title>Account</title>
+    <title>ABC Cinema</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/AccountStyle.css">
+    <link rel="stylesheet" href="css/account.css">
 
 </head>
 <body>

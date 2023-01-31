@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Signup</title>
+    <title>ABC Cinema</title>
     <link rel="stylesheet" href="css/loginstyle.css">
     <link rel="stylesheet" href="css/style.css">
 
@@ -61,7 +61,7 @@
         </div>
     </div>
 </section>
-<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css">
 <script type="text/javascript">

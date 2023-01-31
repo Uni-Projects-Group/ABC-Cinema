@@ -9,38 +9,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Ticket UI Page</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="css/movie.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/movie.js"></script>
-    <script>
-
-        const daterange = document.getElementById("D1");
-        const myarray = daterange.split(" ");
-
-        const date = new Date();
-        const year1 = myarray[0];
-        const month1 = myarray[1];
-        const day1 = myarray[2];
-        const hour1 = date.getHours();
-        const minutes1 = date.getMinutes();
-        const seconds1 = date.getSeconds();
-        const milliseconds1 = date.getMilliseconds();
-
-
-        const todaydate = new Date(year1, month1, day1, hour1, minutes1, seconds1, milliseconds1);
-        if (todaydate <= date) {
-
-
-            document.getElementById("B1").disabled = False;
-
-        } else {
-
-            document.getElementByID("B1").disabled = True;
-        }
-    </script>
+    <title>ABC Cinema</title>
+    <link rel="stylesheet" type="text/css" href="css/booking.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/seat-modal.css">
 </head>
 <body>
 <jsp:useBean id="dbConfig" class="com.example.abccinema.envBean"/>
@@ -52,49 +24,20 @@
         password="${dbConfig.password}"
 />
 <jsp:include page="header.jsp"/>
-<div class="movie1">
-
-    <form name="form1">
-
-        <sql:query var="date1" dataSource="${source}">
-
-            select * from datetable;
+<div class="movieinfo">
+    <form method="post" action="booking">
+        <input type="hidden" name="movieID" value="${param.id}">
+        <sql:query var="movie" dataSource="${source}">
+            select * from nowshowing where movieid=?;
+            <sql:param value="${param.id}"/>
         </sql:query>
 
-
-        <h1>Date <select id="D1">
-            <c:forEach var="result" items="${date1.rows}">
-
-
-                <option value="${result.date}">${result.date}</option>
-
-
-            </c:forEach>
-        </select>
-
-
-            <sql:query var="movie" dataSource="${source}">
-                select * from nowshowing where movieid=?;
-                <sql:param value="${param.id}"/>
-            </sql:query>
-
-
-            <c:forEach var="row" items="${movie.rows}">
-
-
-            <h1>${row.name}</h1></center
-
-            <pre><h1>${row.Language} Movie </h1></pre>
+        <c:forEach var="row" items="${movie.rows}">
+            <h1>${row.name}</h1>
+            <pre>${row.Language} Movie</pre>
             <h3 style="color:red">${row.description}</h3>
-
-
-            </select>
-        </h1>
-
-
-        <input type="button" id="B1" value="${row.Timeslot}">
-
-
+            <label for="continue">Show times: </label>
+            <input type="button" id="continue" value="${row.Timeslot}">
         </c:forEach>
 
         <jsp:useBean id="seatCheck" class="com.example.abccinema.seatCheckBean">
@@ -153,33 +96,26 @@
                         Seats: <span id="selected"></span>
                         <input type="submit" id="submit-details" value="Proceed to payment >>">
                     </p>
-                    <p>Total: <span id="total"></span></p>
+                    <p>Total: <span id="total">$ 0</span></p>
                     <input type="hidden" id="payable" name="payable">
                 </div>
             </div>
         </div>
-
-
     </form>
 
 </div>
 <br>
 <div class="image">
     <sql:query var="images" dataSource="${source}">
-        SELECT image_path from nowshowing where movieid=?;
-
+        SELECT image_path from nowshowing where movieid = ?;
         <sql:param value="${param.id}"/>
     </sql:query>
 
     <c:forEach var="result" items="${images.rows}">
-
-        <img class="pic" src="${result.image_path}"></img>
-
+        <img class="pic" src="${result.image_path}" alt=""/>
     </c:forEach>
 </div>
-
-
-<script src="js/fixed.js">
-</script>
+<!-- <script type="text/javascript" src="js/datebtn.js"></script> -->
+<script type="text/javascript" src="js/booking.js"></script>
 </body>
 </html>

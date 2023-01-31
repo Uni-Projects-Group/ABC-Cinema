@@ -79,7 +79,7 @@ public class utilBean {
                 email = out.getString(1);
             }
 
-            PreparedStatement qMovie = connection.prepareStatement("select mov_name from dummy_records where mov_id = ?");
+            PreparedStatement qMovie = connection.prepareStatement("select name from nowshowing where movieid = ?");
             qMovie.setInt(1, Integer.parseInt(movieID));
             out = qMovie.executeQuery();
             while (out.next()) {

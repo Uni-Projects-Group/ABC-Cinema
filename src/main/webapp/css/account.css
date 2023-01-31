@@ -4,17 +4,13 @@
     border-radius: 20px;
     align-items: center;
     color: white;
-
-
-
 }
 .displayuser table{
-
     padding:50px;
     color: white;
     border-spacing: 30px;
-
 }
+
 .AcDetailsContainer{
     display: flex;
     justify-content: flex-start;

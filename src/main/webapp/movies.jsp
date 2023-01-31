@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Movie Tickets| Movies</title>
+    <title>ABC Cinema</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/moviesstyle.css">
 </head>
@@ -40,7 +40,7 @@
                     <div class="card_content">
                         <h2 class="card_title">${row.name}</h2>
                         <p class="card_text">${row.description}</p>
-                        <a href="booking_page.jsp?id=${row.movieid}">
+                        <a href="booking.jsp?id=${row.movieid}">
                             <button class="btn card_btn">Read More</button>
                         </a>
                     </div>

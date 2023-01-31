@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ABC Cinema | Admin Portal</title>
+    <title>ABC Cinema</title>
     <link rel="stylesheet" href="css/loginstyle.css">
     <link rel="stylesheet" href="css/style.css">
 </head>

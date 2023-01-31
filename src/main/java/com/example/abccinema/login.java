@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Objects;
 
 
 @WebServlet("/login")
@@ -47,7 +48,7 @@ public class login extends HttpServlet {
             ResultSet rs = query.executeQuery();
             if (rs.next()) {
                 session.setAttribute("userID", rs.getString("id"));
-                if (redirect != null) {
+                if (!Objects.equals(redirect, "")) {
                     session.removeAttribute("redirectTo");
                     response.sendRedirect(redirect);
                 } else {

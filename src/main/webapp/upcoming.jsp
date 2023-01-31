@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-
-
 <jsp:useBean id="dbConfig" class="com.example.abccinema.envBean"/>
 <sql:setDataSource
         var="source"
@@ -25,24 +23,17 @@
         <c:forEach var="row" items="${result.rows}">
         <li class="movie-card">
             <div class="movie-image">
-
                 <img src="https://picsum.photos/500/300/?image=${row.mov_id}" class="movie-thumb" alt="">
-                <a href="booking_page.jsp?id=${row.mov_id}"><button class="card-btn">Buy Tickets</button></a>
+                <a href="booking.jsp?id=${row.mov_id}"><button class="card-btn">Buy Tickets</button></a>
             </div>
             <div class="movie-info">
                 <h2 class="movie-name">${row.mov_name}</h2>
                 <b> ${row.lang}</b> </p>
                 <p class="movie-short-description">${row.mov_desc}</p>
-
-
             </div>
             </c:forEach>
         </li>
-
-
     </ul>
-
-
 </section>
-<script src="js/script.js"></script>
+<script src="js/movie.js"></script>
 

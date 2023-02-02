@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="input-container ic2">
-                    <input id="email" class="input" type="text" placeholder=" "/>
+                    <input id="email" name="email" class="input" type="text" placeholder=" "/>
                     <div class="cut cut-short"></div>
                     <label for="email" class="placeholder" name="email">Email</label>
                 </div>
@@ -41,7 +41,7 @@
                     <label for="firstname" class="placeholder">Phone</label>
                 </div>
                 <div class="input-container ic2">
-                    <input id="passw" class="input" type="password" placeholder=" "/>
+                    <input id="passw" name="pass" class="input" type="password" placeholder=" "/>
                     <div class="cut"></div>
                     <label for="email" class="placeholder" name="pass">Password</label>
                 </div>
@@ -50,11 +50,8 @@
                     <div class="cut"></div>
                     <label for="email" class="placeholder" name="pass">Confirm-Password</label>
                 </div>
-
-
                 <button type="text" class="submit">Create</button>
                 <div>
-
                     <a href="login.jsp"><p>Already have an account?</p></a>
                 </div>
             </form>
@@ -70,17 +67,17 @@
     if(status === "success"){
       Swal.fire("Congrats","Account created successfully. Please head to login page to continue.","success");
     } else if(status === "invalidName"){
-      Swal.fire("Congrats","Please Enter Name","error");
+      Swal.fire("Invalid","Please Enter Name","error");
     } else if(status === "invalidEmail"){
-      Swal.fire("Congrats","Please Enter Email","error");
+      Swal.fire("Invalid","Please Enter Email","error");
     } else if(status === "invalidUpwd"){
-      Swal.fire("Congrats","Please Enter Password","error");
+      Swal.fire("Invalid","Please Enter Password","error");
     } else if(status === "invalidConfirmPassword"){
-      Swal.fire("Congrats","Password dont match","error");
+      Swal.fire("Invalid","Password dont match","error");
     } else if(status === "invalidMobile"){
-      Swal.fire("Congrats","Please Enter Mobile","error");
+      Swal.fire("Invalid","Please Enter Mobile","error");
     } else if(status === "invalidMobileLength"){
-      Swal.fire("Congrats","Mobile number should be 10 digits","error");
+      Swal.fire("Invalid","Mobile number should be 10 digits","error");
     }
   })
 </script>

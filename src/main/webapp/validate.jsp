@@ -23,7 +23,7 @@
     <title>ABC Cinema</title>
 </head>
 
-<body>
+<body style="background-color: #282A3A">
 <div class="form-gap"></div>
 <div class="container">
     <div class="row">

@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body oncontextmenu='return false' class='snippet-body bg-info'>
+<body oncontextmenu='return false' class='snippet-body bg-info' style="background-color: #282A3A">
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
 <div>

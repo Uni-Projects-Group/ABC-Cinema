@@ -3,27 +3,24 @@
 }
 
 .movieinfo {
-    padding-top: 10%;
+    padding-top: 150px;
 }
 
 .image {
+    height: 540px;
+    width: 360px;
+    position: absolute;
+    right: 10%;
+}
 
+.pic {
     height: 100%;
     width: 100%;
 }
 
-
-.pic {
-
-    height: 40%;
-    width: 50%;
-}
-
-
 body {
     background-color: #000045;
     color: white;
-
 }
 
 nav {
@@ -59,7 +56,6 @@ nav a {
 }
 
 nav a:hover {
-
     color: #C69749;
 }
 
@@ -72,5 +68,4 @@ nav a:active {
 .logo {
     height: 100px;
     float: left;
-
 }

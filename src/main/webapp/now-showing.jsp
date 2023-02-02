@@ -10,7 +10,7 @@
         password="${dbConfig.password}"
 />
 <sql:query var="result" dataSource="${source}">
-    select movieid,name,language,description from nowshowing;
+    select movieid,name,language,description,image_path from nowshowing;
 </sql:query>
 
 <section class="movies">
@@ -22,16 +22,18 @@
         <c:forEach var="row" items="${result.rows}">
         <li class="movie-card">
             <div class="movie-image">
-                <img src="https://picsum.photos/500/300/?image=${row.movieid}" class="movie-thumb" alt="">
+
+                <img src="${row.image_path}" class="movie-thumb" alt="">
                 <a href="booking.jsp?id=${row.movieid}"><button class="card-btn">Buy Tickets</button></a>
             </div>
             <div class="movie-info">
                 <h2 class="movie-name">${row.name}</h2>
-                <b> ${row.language}</b>
+                <b> ${row.lang}</b>
                 <p class="movie-short-description">${row.description}</p>
             </div>
             </c:forEach>
         </li>
     </ul>
 </section>
-<script src="js/movie.js"></script>
+<script src="js/script.js"></script>
+

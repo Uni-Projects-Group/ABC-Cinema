@@ -32,14 +32,18 @@ public class manage extends HttpServlet {
                     String mov_time = request.getParameter("mov_time");
                     String mov_desc = request.getParameter("mov_desc");
                     String mov_img = request.getParameter("mov_img");
+                    String mov_dir = request.getParameter("mov_dir");
+                    String mov_vid = request.getParameter("mov_vid");
 
-                    PreparedStatement query = connection.prepareStatement("insert into nowshowing (name, genre, Language, Timeslot, description, image_path) values (?,?,?,?,?,?)");
+                    PreparedStatement query = connection.prepareStatement("insert into nowshowing (name, genre, Language, Timeslot, description, image_path, Director, Trailer) values (?,?,?,?,?,?,?,?)");
                     query.setString(1, mov_name);
                     query.setString(2, mov_genre);
                     query.setString(3, mov_lang);
                     query.setString(4, mov_time);
                     query.setString(5, mov_desc);
                     query.setString(6, mov_img);
+                    query.setString(7, mov_dir);
+                    query.setString(8, mov_vid);
                     query.executeUpdate();
                     response.sendRedirect("dashboard.jsp");
                 }

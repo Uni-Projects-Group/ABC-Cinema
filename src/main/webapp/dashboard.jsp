@@ -16,14 +16,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ABC Cinema</title>
-    <link rel="stylesheet" href="css/loginstyle.css">
+    <title>ABC Cinema | Admin Panel</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/account.css">
     <style>
-        .manage-section {
-            margin-top: 6%;
-            padding: 0 4%;
-        }
         .spacer {
             margin: 1% 0;
         }
@@ -31,12 +27,18 @@
 </head>
 <body>
 <nav>
-    <a href="index.jsp"><div class="logo" ><img src="ABC.png" width="150px"></div></a>
+    <a href="index.jsp">
+        <div class="logo"><img src="ABC.png" width="150px"></div>
+    </a>
+    <ul>
+        <li><a href="dashboard.jsp">Dashboard</a></li>
+        <li><a href="submits.jsp">Feedback</a></li>
+    </ul>
 </nav>
 
-<div id="body" style="margin-top: 4%; color: white !important">
-    <div class="manage-section">
-        <h2>Now Showing section</h2>
+<div class="AcDetailsContainer" style="display: block; padding: 96px 64px; color: white">
+    <div>
+        <h1>Now Showing section</h1>
         <sql:query var="nowshowing" dataSource="${source}">
             select * from nowshowing;
         </sql:query>
@@ -48,6 +50,8 @@
                 <th>Time slot</th>
                 <th>Description</th>
                 <th>Image URL</th>
+                <th>Director</th>
+                <th>Trailer</th>
             </tr>
             <c:forEach var="row" items="${nowshowing.rows}">
                 <tr>
@@ -57,6 +61,8 @@
                     <td>${row.Timeslot}</td>
                     <td>${row.description}</td>
                     <td>${row.image_path}</td>
+                    <td>${row.Director}</td>
+                    <td>${row.Trailer}</td>
                 </tr>
             </c:forEach>
         </table>
@@ -70,6 +76,8 @@
             <input type="text" name="mov_time" placeholder="Time (8:00 AM)" required="required">
             <input type="text" name="mov_desc" placeholder="Description" required="required">
             <input type="text" name="mov_img" placeholder="Banner URL" required="required">
+            <input type="text" name="mov_dir" placeholder="Director" required="required">
+            <input type="text" name="mov_vid" placeholder="Movie Trailer" required="required">
             <br>
             <input type="submit" value="Add Record">
         </form>
@@ -84,11 +92,12 @@
                 </c:forEach>
             </select>
             <br>
-            <input type="submit" value="Add Record">
+            <input type="submit" value="Remove Record">
         </form>
     </div>
-    <div class="manage-section">
-        <h2>Upcoming section</h2>
+    <hr class="spacer">
+    <div>
+        <h1>Upcoming section</h1>
         <sql:query var="upcoming" dataSource="${source}">
             select * from upcoming_mov;
         </sql:query>
@@ -133,7 +142,7 @@
                 </c:forEach>
             </select>
             <br>
-            <input type="submit" value="Add Record">
+            <input type="submit" value="Remove Record">
         </form>
     </div>
 </div>

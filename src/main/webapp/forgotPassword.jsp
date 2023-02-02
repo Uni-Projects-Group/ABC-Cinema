@@ -12,7 +12,7 @@
 <style>
 body {
 	background-position: center;
-	background-color: #eee;
+	background-color: #282A3A;
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: #505050;

@@ -18,29 +18,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://www.paypal.com/sdk/js?client-id=AWyPjOnNTcB2BXCzP1nKC8g6RtWJFXM_28F8z_1TxMqdRI8ram4qDIkxsD0oSMFwIWfZQ1iVYZHz5aEX"></script>
 </head>
-<body>
+<body style="background-color: #282A3A">
 
 <div class="pform">
     <c:choose>
         <c:when test="${param.status == 'true'}">
             <div class="t">
                 <!-- include payment SUCCESS message here -->
-                <p>Passed</p>
+                <p><b>Reservation successful!</b></p>
+                <p>Please check your inbox for your receipt.</p>
                 <a href="index.jsp">Back to Index</a>
             </div>
         </c:when>
         <c:when test="${param.status == 'false'}">
             <div class="t">
                 <!-- include payment FAILED message here -->
-                <p>Failed</p>
+                <p><b>Something went wrong!</b></p>
+                <p>We couldn't verify your purchase. Please try again later or contact our support for assistance.</p>
                 <a href="index.jsp">Back to Index</a>
             </div>
         </c:when>
         <c:otherwise>
             <c:set var="amount" value="${sessionScope.payable}"/>
-            <h1>ticket payment</h1>
+            <c:set var="seats" value="${sessionScope.seats}" />
+            <h1>Proceed with payment</h1>
             <div class="t">
-                <p>Total amount: <b>$${amount}</b></p>
+                <p>Seats reserved: <b>${seats}</b></p>
+                <p>Total amount: <b>$ ${amount}</b></p>
             </div>
             <div id="paypal-button-container"></div>
         </c:otherwise>
@@ -89,6 +93,5 @@
         }
     }).render('#paypal-button-container');
 </script>
-
 </body>
 </html>

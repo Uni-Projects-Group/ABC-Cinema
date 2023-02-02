@@ -13,43 +13,71 @@
         user="${dbConfig.user}"
         password="${dbConfig.password}"
 />
-<sql:query var="history" dataSource="${source}">
-    select * from purchase_history where userId = ${sessionScope.userID}
-</sql:query>
 <html>
 <head>
     <title>ABC Cinema</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/account.css">
-
 </head>
 <body>
 <jsp:include page="header.jsp"/>
+
+<sql:query var="user" dataSource="${source}">
+    select * from users where id = ${sessionScope.userID}
+</sql:query>
+
+<sql:query var="history" dataSource="${source}">
+    select orderId,movieId,purchaseId,reserved from purchase_history where userId = ${sessionScope.userID}
+</sql:query>
+
 <div class="AcDetailsContainer">
     <div class="displayuser">
         <div>
-            <h3>Booking History</h3>
+            <h3>Account Details</h3>
+            <table>
+                <c:forEach var="row" items="${user.rows}">
+                    <tr>
+                        <td>Username:</td>
+                        <td>${row.uname}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>${row.uemail}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact:</td>
+                        <td>${row.umobile}</td>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
-        <table>
+        <div>
+            <h3>Booking History</h3>
+            <table>
 
-            <tr>
-                <td>Order ID</td>
-                <td>Movie</td>
-                <td>reserved</td>
-            </tr>
-            <c:forEach var="row" items="${history.rows}">
                 <tr>
-                    <td>${row.userId}</td>
-                    <td>${row.movieId}</td>
-                    <td>${row.reserved}</td>
+                    <th>Order ID</th>
+                    <th>Movie</th>
+                    <th>Time slot</th>
+                    <th>Reserved Seats</th>
                 </tr>
-            </c:forEach>
-
-
-        </table>
+                <c:forEach var="row" items="${history.rows}">
+                    <sql:query var="movie" dataSource="${source}">
+                        select * from nowshowing where movieid = ${row.movieid}
+                    </sql:query>
+                    <tr>
+                        <td>${row.orderId}</td>
+                        <c:forEach var="mov" items="${movie.rows}">
+                            <td>${mov.name}</td>
+                            <td>${mov.Timeslot}</td>
+                        </c:forEach>
+                        <td>${row.reserved}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </div>
 </div>
-
 
 </body>
 </html>

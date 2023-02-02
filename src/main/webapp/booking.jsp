@@ -28,14 +28,26 @@
     <form method="post" action="booking">
         <input type="hidden" name="movieID" value="${param.id}">
         <sql:query var="movie" dataSource="${source}">
-            select * from nowshowing where movieid=?;
+            select * from nowshowing where movieid = ?;
             <sql:param value="${param.id}"/>
         </sql:query>
 
+        <div class="image">
+            <sql:query var="images" dataSource="${source}">
+                SELECT image_path from nowshowing where movieid = ?;
+                <sql:param value="${param.id}"/>
+            </sql:query>
+            <c:forEach var="result" items="${images.rows}">
+                <img class="pic" src="${result.image_path}" alt=""/>
+            </c:forEach>
+        </div>
+
         <c:forEach var="row" items="${movie.rows}">
             <h1>${row.name}</h1>
-            <pre>${row.Language} Movie</pre>
-            <h3 style="color:red">${row.description}</h3>
+            <pre>Language: ${row.Language}</pre>
+            <pre>Director: ${row.Director}</pre>
+            <h3 style="color:red; width: 50%">${row.description}</h3>
+            <h4><a href="${row.Trailer}" target="_blank" style="color: wheat">Watch the Trailer</a></h4>
             <label for="continue">Show times: </label>
             <input type="button" id="continue" value="${row.Timeslot}">
         </c:forEach>
@@ -76,7 +88,7 @@
                                             <label>
                                                 <input type="checkbox" name="seats" value="${seatNum}" id="${seatNum}"
                                                        <c:if test="${fn:contains(seatCheck.reserved, seatNum)}">disabled</c:if>>
-                                                <span class="seat-label">Seat</span>
+                                                <span class="seat-label">${seatNum}</span>
                                             </label>
                                         </c:forEach>
                                     </div>
@@ -102,18 +114,6 @@
             </div>
         </div>
     </form>
-
-</div>
-<br>
-<div class="image">
-    <sql:query var="images" dataSource="${source}">
-        SELECT image_path from nowshowing where movieid = ?;
-        <sql:param value="${param.id}"/>
-    </sql:query>
-
-    <c:forEach var="result" items="${images.rows}">
-        <img class="pic" src="${result.image_path}" alt=""/>
-    </c:forEach>
 </div>
 <!-- <script type="text/javascript" src="js/datebtn.js"></script> -->
 <script type="text/javascript" src="js/booking.js"></script>
